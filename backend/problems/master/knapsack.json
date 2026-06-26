@@ -1,0 +1,22 @@
+{
+  "id": "knapsack",
+  "title": "0/1 Knapsack",
+  "difficulty": "master",
+  "type": "algorithm",
+  "description": "Line 1: capacity. Line 2: space-separated item weights. Line 3: space-separated item values (same order). Print the maximum total value that fits without exceeding capacity; each item may be used at most once.",
+  "test_cases": [
+    {
+      "input": "50\n10 20 30\n60 100 120",
+      "expected": "220"
+    },
+    {
+      "input": "10\n5 4 6 3\n10 40 30 50",
+      "expected": "90"
+    },
+    {
+      "input": "0\n1 2\n10 20",
+      "expected": "0"
+    }
+  ],
+  "time_limit_seconds": 15
+}

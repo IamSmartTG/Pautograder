@@ -1,0 +1,26 @@
+{
+  "id": "anagram-check",
+  "title": "Anagram Check",
+  "difficulty": "medium",
+  "type": "algorithm",
+  "description": "Read two strings on two separate lines. Print 'true' if they are anagrams of each other, else 'false'.",
+  "test_cases": [
+    {
+      "input": "listen\nsilent",
+      "expected": "true"
+    },
+    {
+      "input": "hello\nworld",
+      "expected": "false"
+    },
+    {
+      "input": "rat\ntar",
+      "expected": "true"
+    },
+    {
+      "input": "abc\nabcd",
+      "expected": "false"
+    }
+  ],
+  "time_limit_seconds": 5
+}

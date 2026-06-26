@@ -1,0 +1,26 @@
+{
+  "id": "lcs-length",
+  "title": "Longest Common Subsequence",
+  "difficulty": "hard",
+  "type": "algorithm",
+  "description": "Read two strings on two lines. Print the length of their longest common subsequence.",
+  "test_cases": [
+    {
+      "input": "abcde\nace",
+      "expected": "3"
+    },
+    {
+      "input": "abc\nabc",
+      "expected": "3"
+    },
+    {
+      "input": "abc\ndef",
+      "expected": "0"
+    },
+    {
+      "input": "AGGTAB\nGXTXAYB",
+      "expected": "4"
+    }
+  ],
+  "time_limit_seconds": 10
+}

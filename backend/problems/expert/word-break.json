@@ -1,0 +1,22 @@
+{
+  "id": "word-break",
+  "title": "Word Break",
+  "difficulty": "expert",
+  "type": "algorithm",
+  "description": "Line 1: a target string. Line 2: space-separated dictionary words. Print 'true' if the target can be segmented into a sequence of dictionary words (each usable any number of times), else 'false'.",
+  "test_cases": [
+    {
+      "input": "leetcode\nleet code",
+      "expected": "true"
+    },
+    {
+      "input": "applepenapple\napple pen",
+      "expected": "true"
+    },
+    {
+      "input": "catsandog\ncats dog sand and",
+      "expected": "false"
+    }
+  ],
+  "time_limit_seconds": 10
+}

@@ -1,0 +1,26 @@
+{
+  "id": "reverse-string",
+  "title": "Reverse String",
+  "difficulty": "easy",
+  "type": "algorithm",
+  "description": "Read one line of text and print it reversed.",
+  "test_cases": [
+    {
+      "input": "hello",
+      "expected": "olleh"
+    },
+    {
+      "input": "racecar",
+      "expected": "racecar"
+    },
+    {
+      "input": "abc def",
+      "expected": "fed cba"
+    },
+    {
+      "input": "a",
+      "expected": "a"
+    }
+  ],
+  "time_limit_seconds": 5
+}

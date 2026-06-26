@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 const BADGE_COLOR = {
   easy: '#22c55e', medium: '#f59e0b', hard: '#ef4444',
-  expert: '#8b5cf6', master: '#ec4899'
+  expert: '#8b5cf6', master: '#ec4899', challenger: '#111827'
 }
 const TYPE_ICON = { algorithm: '⚡', interactive: '🎨', webapp: '🌐' }
 

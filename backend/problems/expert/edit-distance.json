@@ -1,0 +1,26 @@
+{
+  "id": "edit-distance",
+  "title": "Edit Distance",
+  "difficulty": "expert",
+  "type": "algorithm",
+  "description": "Read two strings on two lines (either may be empty). Print the minimum number of single-character insertions, deletions, or substitutions to turn the first into the second.",
+  "test_cases": [
+    {
+      "input": "horse\nros",
+      "expected": "3"
+    },
+    {
+      "input": "intention\nexecution",
+      "expected": "5"
+    },
+    {
+      "input": "abc\nabc",
+      "expected": "0"
+    },
+    {
+      "input": "\nabc",
+      "expected": "3"
+    }
+  ],
+  "time_limit_seconds": 10
+}

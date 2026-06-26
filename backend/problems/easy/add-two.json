@@ -1,0 +1,26 @@
+{
+  "id": "add-two",
+  "title": "Add Two Numbers",
+  "difficulty": "easy",
+  "type": "algorithm",
+  "description": "Read two space-separated integers on one line and print their sum.",
+  "test_cases": [
+    {
+      "input": "3 5",
+      "expected": "8"
+    },
+    {
+      "input": "10 -4",
+      "expected": "6"
+    },
+    {
+      "input": "0 0",
+      "expected": "0"
+    },
+    {
+      "input": "1000000 2000000",
+      "expected": "3000000"
+    }
+  ],
+  "time_limit_seconds": 5
+}

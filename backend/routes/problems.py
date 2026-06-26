@@ -5,7 +5,7 @@ from fastapi import APIRouter, HTTPException
 
 router = APIRouter()
 PROBLEMS_DIR = Path(__file__).parent.parent / "problems"
-_DIFFICULTY_ORDER = ["easy", "medium", "hard", "expert", "master"]
+_DIFFICULTY_ORDER = ["easy", "medium", "hard", "expert", "master", "challenger"]
 # Problem ids are filesystem path segments — reject anything that could traverse
 _VALID_ID = re.compile(r"[A-Za-z0-9_-]+")
 

@@ -1,0 +1,26 @@
+{
+  "id": "merge-intervals",
+  "title": "Merge Intervals",
+  "difficulty": "hard",
+  "type": "algorithm",
+  "description": "Line 1: integer n. Next n lines: two integers 'start end'. Print how many intervals remain after merging all overlapping ones.",
+  "test_cases": [
+    {
+      "input": "3\n1 3\n2 6\n8 10",
+      "expected": "2"
+    },
+    {
+      "input": "2\n1 4\n5 6",
+      "expected": "2"
+    },
+    {
+      "input": "4\n1 4\n2 3\n5 7\n6 8",
+      "expected": "2"
+    },
+    {
+      "input": "1\n1 10",
+      "expected": "1"
+    }
+  ],
+  "time_limit_seconds": 10
+}

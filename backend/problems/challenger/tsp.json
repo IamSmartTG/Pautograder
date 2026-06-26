@@ -1,0 +1,26 @@
+{
+  "id": "tsp",
+  "title": "Travelling Salesman (Exact)",
+  "difficulty": "challenger",
+  "type": "algorithm",
+  "description": "Line 1: integer n (number of cities). Next n lines: an n x n symmetric distance matrix (space-separated). Print the minimum cost of a tour that starts at city 0, visits every city exactly once, and returns to city 0. (Held-Karp DP \u2014 exponential in n.)",
+  "test_cases": [
+    {
+      "input": "4\n0 10 15 20\n10 0 35 25\n15 35 0 30\n20 25 30 0",
+      "expected": "80"
+    },
+    {
+      "input": "1\n0",
+      "expected": "0"
+    },
+    {
+      "input": "2\n0 5\n5 0",
+      "expected": "10"
+    },
+    {
+      "input": "3\n0 1 2\n1 0 4\n2 4 0",
+      "expected": "7"
+    }
+  ],
+  "time_limit_seconds": 15
+}

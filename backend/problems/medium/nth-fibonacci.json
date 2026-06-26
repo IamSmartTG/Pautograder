@@ -1,0 +1,30 @@
+{
+  "id": "nth-fibonacci",
+  "title": "Nth Fibonacci",
+  "difficulty": "medium",
+  "type": "algorithm",
+  "description": "Read an integer n and print the nth Fibonacci number (F(0)=0, F(1)=1).",
+  "test_cases": [
+    {
+      "input": "0",
+      "expected": "0"
+    },
+    {
+      "input": "1",
+      "expected": "1"
+    },
+    {
+      "input": "10",
+      "expected": "55"
+    },
+    {
+      "input": "20",
+      "expected": "6765"
+    },
+    {
+      "input": "30",
+      "expected": "832040"
+    }
+  ],
+  "time_limit_seconds": 5
+}

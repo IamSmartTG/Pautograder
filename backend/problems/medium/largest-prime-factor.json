@@ -1,0 +1,26 @@
+{
+  "id": "largest-prime-factor",
+  "title": "Largest Prime Factor",
+  "difficulty": "medium",
+  "type": "algorithm",
+  "description": "Read an integer n (n >= 2) and print its largest prime factor.",
+  "test_cases": [
+    {
+      "input": "12",
+      "expected": "3"
+    },
+    {
+      "input": "17",
+      "expected": "17"
+    },
+    {
+      "input": "100",
+      "expected": "5"
+    },
+    {
+      "input": "13195",
+      "expected": "29"
+    }
+  ],
+  "time_limit_seconds": 10
+}

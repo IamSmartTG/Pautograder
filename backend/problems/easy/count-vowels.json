@@ -1,0 +1,26 @@
+{
+  "id": "count-vowels",
+  "title": "Count Vowels",
+  "difficulty": "easy",
+  "type": "algorithm",
+  "description": "Read one line of text and print the number of vowels (a, e, i, o, u, case-insensitive).",
+  "test_cases": [
+    {
+      "input": "hello world",
+      "expected": "3"
+    },
+    {
+      "input": "AEIOU",
+      "expected": "5"
+    },
+    {
+      "input": "xyz",
+      "expected": "0"
+    },
+    {
+      "input": "Programming",
+      "expected": "3"
+    }
+  ],
+  "time_limit_seconds": 5
+}

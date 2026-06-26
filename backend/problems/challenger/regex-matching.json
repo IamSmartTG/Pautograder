@@ -1,0 +1,30 @@
+{
+  "id": "regex-matching",
+  "title": "Regular Expression Matching",
+  "difficulty": "challenger",
+  "type": "algorithm",
+  "description": "Line 1: input string s. Line 2: a pattern p supporting '.' (any single char) and '*' (zero or more of the preceding element). Print 'true' if p matches the ENTIRE string s, else 'false'.",
+  "test_cases": [
+    {
+      "input": "aa\na",
+      "expected": "false"
+    },
+    {
+      "input": "aa\na*",
+      "expected": "true"
+    },
+    {
+      "input": "ab\n.*",
+      "expected": "true"
+    },
+    {
+      "input": "aab\nc*a*b",
+      "expected": "true"
+    },
+    {
+      "input": "mississippi\nmis*is*p*.",
+      "expected": "false"
+    }
+  ],
+  "time_limit_seconds": 15
+}
