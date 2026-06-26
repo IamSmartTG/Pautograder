@@ -6,7 +6,7 @@ ROOT=/workspaces/Pautograder
 cd "$ROOT" 2>/dev/null || exit 0
 
 if ! curl -fs -o /dev/null http://localhost:8000/api/problems 2>/dev/null; then
-  ( cd "$ROOT/backend" && nohup python -m uvicorn main:app --host 0.0.0.0 --port 8000 >/tmp/backend.log 2>&1 & )
+  ( cd "$ROOT/backend" && nohup python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload >/tmp/backend.log 2>&1 & )
 fi
 
 if ! curl -fs -o /dev/null http://localhost:5173 2>/dev/null; then
