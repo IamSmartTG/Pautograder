@@ -33,7 +33,8 @@ def list_problems():
         if d.is_dir():
             for f in d.glob("*.json"):
                 problems.append(_load_summary(f))
-    problems.sort(key=lambda p: _DIFFICULTY_ORDER.index(p["difficulty"]))
+    problems.sort(key=lambda p: _DIFFICULTY_ORDER.index(p["difficulty"])
+                  if p["difficulty"] in _DIFFICULTY_ORDER else len(_DIFFICULTY_ORDER))
     return problems
 
 @router.get("/problems/{problem_id}")

@@ -40,3 +40,17 @@ def test_submit_no_body_rejected():
 def test_submit_paste_too_large():
     r = client.post("/api/submit/algo-001", data={"code": "x" * (51 * 1024)})
     assert r.status_code == 413
+
+def test_submit_paste_rejected_for_webapp():
+    # Pasted code can't satisfy a webapp problem (needs index.html)
+    r = client.post("/api/submit/webapp-001", data={"code": "<html></html>"})
+    assert r.status_code == 400
+
+def test_submit_zip_rejected_for_algorithm():
+    import io, zipfile
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zf:
+        zf.writestr("solution.py", "print(1)")
+    r = client.post("/api/submit/algo-001",
+                    files={"file": ("sol.zip", buf.getvalue(), "application/zip")})
+    assert r.status_code == 400

@@ -32,26 +32,31 @@ async def submit(
     if not code and not file:
         raise HTTPException(400, "Provide either 'code' or 'file'")
 
+    problem, problem_dir = _load_problem(problem_id)
+    ptype = problem["type"]
+
     if code:
         check_paste(code)  # raises 413 if too large
-
-    problem, problem_dir = _load_problem(problem_id)
-
-    if code:
+        if ptype != "algorithm":
+            raise HTTPException(400, "This problem type requires a file upload, not pasted code")
         submission_files = {"solution.py": code.encode()}
+        content = None
     else:
         content = await file.read()
-        check_upload(file.filename, content)
-        if (file.filename or "").lower().endswith(".zip"):
+        fname = file.filename or "upload"
+        check_upload(fname, content)
+        is_zip = fname.lower().endswith(".zip")
+        if ptype == "algorithm" and is_zip:
+            raise HTTPException(400, "Upload a single source file or paste code for algorithm problems")
+        if is_zip:
             # Extract so index.html etc. land directly in the sandbox tree
             submission_files = safe_extract_zip(content)
             if not submission_files:
                 raise HTTPException(400, "Zip archive contains no usable files")
         else:
-            safe_name = Path(file.filename).name  # strips any ../ components
+            safe_name = Path(fname).name or "upload"  # strips any ../ components
             submission_files = {safe_name: content}
 
-    ptype = problem["type"]
     loop = asyncio.get_event_loop()
     if ptype == "algorithm":
         code_str = code if code else content.decode("utf-8", errors="replace")
