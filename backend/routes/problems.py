@@ -1,10 +1,13 @@
 import json
+import re
 from pathlib import Path
 from fastapi import APIRouter, HTTPException
 
 router = APIRouter()
 PROBLEMS_DIR = Path(__file__).parent.parent / "problems"
 _DIFFICULTY_ORDER = ["easy", "medium", "hard", "expert", "master"]
+# Problem ids are filesystem path segments — reject anything that could traverse
+_VALID_ID = re.compile(r"[A-Za-z0-9_-]+")
 
 def _load_summary(path: Path) -> dict:
     data = json.loads(path.read_text())
@@ -14,6 +17,8 @@ def _load_full(path: Path) -> dict:
     return json.loads(path.read_text())
 
 def _find_problem_file(problem_id: str) -> Path | None:
+    if not _VALID_ID.fullmatch(problem_id):
+        return None
     for d in PROBLEMS_DIR.iterdir():
         if d.is_dir():
             p = d / f"{problem_id}.json"

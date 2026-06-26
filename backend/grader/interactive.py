@@ -14,7 +14,10 @@ def grade_interactive(problem: dict, problem_dir: Path, files: dict[str, bytes])
     baseline_name = Path(problem["screenshot_baseline"]).name
     threshold = problem.get("diff_threshold", 0.05)
 
-    submission = dict(files)
+    # Drop any student-supplied Playwright config so it can't shadow ours and
+    # disable the screenshot comparison (e.g. ignoreSnapshots / loose threshold).
+    submission = {k: v for k, v in files.items()
+                  if not Path(k).name.lower().startswith("playwright.config.")}
     submission[script_name] = (problem_dir / problem["playwright_script"]).read_bytes()
     # Pin a deterministic, platform-independent snapshot path so the shipped
     # baseline is found — Playwright's default appends a platform suffix we
@@ -31,7 +34,8 @@ def grade_interactive(problem: dict, problem_dir: Path, files: dict[str, bytes])
 
     output = run_in_sandbox(
         image=BROWSER_IMAGE,
-        command=["npx", "playwright", "test", f"/submission/{script_name}", "--reporter=json"],
+        command=["npx", "playwright", "test", f"/submission/{script_name}",
+                 "--config=/submission/playwright.config.js", "--reporter=json"],
         files=submission,
         timeout=problem.get("time_limit_seconds", 30),
         network="none",

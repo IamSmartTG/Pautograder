@@ -1,5 +1,6 @@
 import asyncio
 import json
+import re
 from pathlib import Path
 from typing import Optional
 from fastapi import APIRouter, HTTPException, UploadFile, File, Form
@@ -13,6 +14,8 @@ router = APIRouter()
 PROBLEMS_DIR = Path(__file__).parent.parent / "problems"
 
 def _load_problem(problem_id: str) -> tuple[dict, Path]:
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", problem_id):
+        raise HTTPException(404, f"Problem '{problem_id}' not found")
     for d in PROBLEMS_DIR.iterdir():
         if d.is_dir():
             p = d / f"{problem_id}.json"

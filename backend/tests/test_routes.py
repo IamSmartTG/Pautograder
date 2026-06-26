@@ -23,6 +23,16 @@ def test_get_problem_not_found():
     r = client.get("/api/problems/does-not-exist")
     assert r.status_code == 404
 
+def test_get_problem_rejects_traversal():
+    # Backslash path-traversal attempt (Windows separator) and other invalid ids
+    for bad in ("..%5C..%5Cwin.ini", "bad!id", "a.b"):
+        r = client.get(f"/api/problems/{bad}")
+        assert r.status_code == 404, bad
+
+def test_submit_rejects_traversal():
+    r = client.post("/api/submit/bad!id", data={"code": "print(1)"})
+    assert r.status_code == 404
+
 def test_submit_no_body_rejected():
     r = client.post("/api/submit/algo-001")
     assert r.status_code == 400

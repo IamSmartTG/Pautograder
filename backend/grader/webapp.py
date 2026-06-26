@@ -8,7 +8,9 @@ BROWSER_IMAGE = "pautograder-browser-sandbox"
 def grade_webapp(problem: dict, problem_dir: Path, files: dict[str, bytes]) -> dict:
     script_name = Path(problem["playwright_script"]).name
 
-    submission = dict(files)
+    # Drop any student-supplied Playwright config so it can't alter the run
+    submission = {k: v for k, v in files.items()
+                  if not Path(k).name.lower().startswith("playwright.config.")}
     submission[script_name] = (problem_dir / problem["playwright_script"]).read_bytes()
 
     output = run_in_sandbox(
