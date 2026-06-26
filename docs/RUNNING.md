@@ -89,7 +89,7 @@ Create `ref-counter/playwright.config.js` — must match the config the grader i
 
 ```js
 module.exports = {
-  snapshotPathTemplate: '{testFileDir}/__screenshots__/{arg}{ext}',
+  snapshotPathTemplate: '/submission/__screenshots__/{arg}{ext}',
   expect: { toHaveScreenshot: { maxDiffPixelRatio: 0.05 } },
   use: { launchOptions: { args: ['--no-sandbox'] } },
 };

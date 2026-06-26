@@ -33,7 +33,7 @@ jobs:
           HTML
           cat > gen/playwright.config.js <<'JS'
           module.exports = {
-            snapshotPathTemplate: '{testFileDir}/__screenshots__/{arg}{ext}',
+            snapshotPathTemplate: '/submission/__screenshots__/{arg}{ext}',
             expect: { toHaveScreenshot: { maxDiffPixelRatio: 0.05 } },
             use: { launchOptions: { args: ['--no-sandbox'] } },
           };

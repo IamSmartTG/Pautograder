@@ -24,7 +24,7 @@ def grade_interactive(problem: dict, problem_dir: Path, files: dict[str, bytes])
     # can't predict from here.
     submission["playwright.config.js"] = (
         "module.exports = {\n"
-        "  snapshotPathTemplate: '{testFileDir}/__screenshots__/{arg}{ext}',\n"
+        "  snapshotPathTemplate: '/submission/__screenshots__/{arg}{ext}',\n"
         f"  expect: {{ toHaveScreenshot: {{ maxDiffPixelRatio: {threshold} }} }},\n"
         "  use: { launchOptions: { args: ['--no-sandbox'] } },\n"
         "};\n"
