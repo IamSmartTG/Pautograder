@@ -37,3 +37,25 @@ def test_timeout_case():
         result = grade_algorithm(PROBLEM, "print(input())")
     assert result["passed"] == 1
     assert result["results"][1]["output"] == "timeout"
+
+def test_c_all_pass():
+    # compile-check (ok) then one run per test case
+    with patch("grader.algorithm.run_in_sandbox", side_effect=[
+        _mock_sandbox(exit_code=0),        # compile-check
+        _mock_sandbox("hello\n"),          # case 1
+        _mock_sandbox("world\n"),          # case 2
+    ]):
+        result = grade_algorithm(PROBLEM, "int main(){}", "c")
+    assert result["score"] == 100
+    assert result["passed"] == 2
+
+def test_c_compile_error():
+    with patch("grader.algorithm.run_in_sandbox", side_effect=[
+        {"stdout": "", "stderr": "solution.c:1:1: error: expected ';'",
+         "exit_code": 1, "timed_out": False},
+    ]):
+        result = grade_algorithm(PROBLEM, "int main(){ bad }", "c")
+    assert result["score"] == 0
+    assert result["passed"] == 0
+    assert "error" in result["error"]
+    assert result["results"][0]["output"] == "compile error"

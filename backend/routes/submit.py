@@ -28,6 +28,7 @@ async def submit(
     problem_id: str,
     code: Optional[str] = Form(None),
     file: Optional[UploadFile] = File(None),
+    language: Optional[str] = Form("python"),
 ):
     if not code and not file:
         raise HTTPException(400, "Provide either 'code' or 'file'")
@@ -60,7 +61,7 @@ async def submit(
     loop = asyncio.get_event_loop()
     if ptype == "algorithm":
         code_str = code if code else content.decode("utf-8", errors="replace")
-        return await loop.run_in_executor(_executor, grade_algorithm, problem, code_str)
+        return await loop.run_in_executor(_executor, grade_algorithm, problem, code_str, language)
     elif ptype == "interactive":
         return await loop.run_in_executor(_executor, grade_interactive, problem, problem_dir, submission_files)
     elif ptype == "webapp":

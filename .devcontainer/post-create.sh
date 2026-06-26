@@ -10,6 +10,7 @@ echo "==> Installing frontend dependencies"
 
 echo "==> Building grading sandbox images (the browser image is large; a few minutes)"
 docker build -t pautograder-python-sandbox  docker/python-sandbox/
+docker build -t pautograder-c-sandbox       docker/c-sandbox/
 docker build -t pautograder-browser-sandbox docker/browser-sandbox/
 
 echo "==> Creating internal grading network"

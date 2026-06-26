@@ -12,6 +12,7 @@ export default function Submit() {
   const [fileError, setFileError] = useState(null)
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState(null)
+  const [language, setLanguage] = useState('python')
   const fileRef = useRef()
 
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function Submit() {
     const form = new FormData()
     if (tab === 'paste') form.append('code', code)
     else form.append('file', file)
+    if (problem.type === 'algorithm') form.append('language', language)
 
     try {
       const res = await fetch(`/api/submit/${id}`, { method: 'POST', body: form })
@@ -98,9 +100,19 @@ export default function Submit() {
         </div>
       )}
 
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+      <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center' }}>
         {problem.type === 'algorithm' && <TabBtn t="paste" label="Paste Code" />}
         <TabBtn t="upload" label="Upload File" />
+        {problem.type === 'algorithm' && (
+          <select value={language} onChange={e => setLanguage(e.target.value)} style={{
+            marginLeft: 'auto', padding: '6px 10px', borderRadius: 4,
+            border: '1px solid #d1d5db', fontSize: 13, cursor: 'pointer'
+          }}>
+            <option value="python">Python 3.11</option>
+            <option value="c">C (gcc)</option>
+            <option value="cpp">C++ (g++ 17)</option>
+          </select>
+        )}
       </div>
 
       {tab === 'paste' ? (
