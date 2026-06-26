@@ -26,3 +26,6 @@ def test_strips_student_config_and_pins_config():
     assert "playwright.config.js" in files
     # Auto-discovery disabled by pinning the grader config explicitly
     assert "--config=/submission/playwright.config.js" in captured["command"]
+    # Chromium-in-container needs --no-sandbox and a bigger /dev/shm
+    assert b"--no-sandbox" in files["playwright.config.js"]
+    assert captured["shm_size"] == "512m"

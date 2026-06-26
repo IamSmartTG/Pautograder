@@ -12,13 +12,21 @@ def grade_webapp(problem: dict, problem_dir: Path, files: dict[str, bytes]) -> d
     submission = {k: v for k, v in files.items()
                   if not Path(k).name.lower().startswith("playwright.config.")}
     submission[script_name] = (problem_dir / problem["playwright_script"]).read_bytes()
+    # Our config: Chromium needs --no-sandbox running as root in the container.
+    submission["playwright.config.js"] = (
+        "module.exports = {\n"
+        "  use: { launchOptions: { args: ['--no-sandbox'] } },\n"
+        "};\n"
+    ).encode()
 
     output = run_in_sandbox(
         image=BROWSER_IMAGE,
-        command=["npx", "playwright", "test", f"/submission/{script_name}", "--reporter=json"],
+        command=["npx", "playwright", "test", f"/submission/{script_name}",
+                 "--config=/submission/playwright.config.js", "--reporter=json"],
         files=submission,
         timeout=problem.get("time_limit_seconds", 30),
         network="pautograder_sandbox",
+        shm_size="512m",  # Chromium crashes on the default 64m /dev/shm
     )
 
     try:

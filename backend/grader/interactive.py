@@ -26,6 +26,7 @@ def grade_interactive(problem: dict, problem_dir: Path, files: dict[str, bytes])
         "module.exports = {\n"
         "  snapshotPathTemplate: '{testFileDir}/__screenshots__/{arg}{ext}',\n"
         f"  expect: {{ toHaveScreenshot: {{ maxDiffPixelRatio: {threshold} }} }},\n"
+        "  use: { launchOptions: { args: ['--no-sandbox'] } },\n"
         "};\n"
     ).encode()
     submission[f"__screenshots__/{baseline_name}"] = (
@@ -39,6 +40,7 @@ def grade_interactive(problem: dict, problem_dir: Path, files: dict[str, bytes])
         files=submission,
         timeout=problem.get("time_limit_seconds", 30),
         network="none",
+        shm_size="512m",  # Chromium crashes on the default 64m /dev/shm
     )
 
     passed = output["exit_code"] == 0 and not output["timed_out"]

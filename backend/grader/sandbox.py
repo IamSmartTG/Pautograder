@@ -12,6 +12,7 @@ def run_in_sandbox(
     files: dict[str, bytes],
     timeout: int,
     network: str = "none",
+    shm_size: str | None = None,
 ) -> dict:
     global _client
     if _client is None:
@@ -34,6 +35,7 @@ def run_in_sandbox(
                 cpu_quota=50000,
                 network_mode=network,
                 pids_limit=64,
+                shm_size=shm_size,  # bigger /dev/shm for Chromium (browser graders)
                 # ponytail: safe hardening only. cap_drop=ALL / non-root / read-only
                 # rootfs deferred — they can break Chromium's sandbox + Playwright
                 # writes and need a Docker test pass before enabling.

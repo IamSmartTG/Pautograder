@@ -87,7 +87,7 @@ Update later with `git pull && docker compose up -d --build`.
 
 ## Troubleshooting
 
-- **Algorithm grades work, browser ones fail.** Chromium in the Playwright image runs as root and often needs `--no-sandbox`, plus more shared memory. Add to `run_in_sandbox`'s `containers.run(...)` a larger `shm_size="512m"`, and pass Chromium `--no-sandbox` via the injected Playwright config's `use.launchOptions.args`. (Tracked in `docs/RUNNING.md` → Known limitations.)
+- **Algorithm grades work, browser ones fail.** `--no-sandbox` and `shm_size=512m` are already wired into both browser graders. If Chromium still won't launch, confirm the `pautograder-browser-sandbox` image built fully and the VM has enough RAM/swap; bump `shm_size` further in `backend/grader/sandbox.py`.
 - **Every grade fails with a mount/empty-dir error.** The scratch path doesn't match — confirm both the `TMPDIR` env and the `volumes` entry use the exact same path, and that the host dir exists and is writable.
 - **`pautograder_sandbox` network not found.** Run step 3; the backend references it by exact name for webapp grading.
 - **Browser image build is slow / OOMs.** It's large; give the VM swap or build it once and let it cache.

@@ -91,6 +91,7 @@ Create `ref-counter/playwright.config.js` — must match the config the grader i
 module.exports = {
   snapshotPathTemplate: '{testFileDir}/__screenshots__/{arg}{ext}',
   expect: { toHaveScreenshot: { maxDiffPixelRatio: 0.05 } },
+  use: { launchOptions: { args: ['--no-sandbox'] } },
 };
 ```
 
@@ -117,6 +118,6 @@ rm -rf ref-counter
 
 ## Known limitations / TODO
 
-- **Chromium as root** — the Playwright image runs as root; if browser grading fails to launch Chromium ("running as root without `--no-sandbox`"), add `use: { launchOptions: { args: ['--no-sandbox'] } }` to the injected config in `backend/grader/interactive.py` and the same for the webapp spec. Verify against the running image.
+- **Chromium flags (applied)** — both browser graders inject `--no-sandbox` and run the container with `shm_size=512m`, which Chromium needs running as root in a container. If the browser still fails to launch, verify the `pautograder-browser-sandbox` image built fully and the VM has enough RAM; bump `shm_size` in `backend/grader/sandbox.py` if needed.
 - **W2 sandbox hardening (partial)** — `no-new-privileges` is applied. `cap_drop=["ALL"]`, a non-root user, and a read-only rootfs are deferred: they can break Chromium's sandbox and Playwright's writes, so enable them only after testing against `pautograder-browser-sandbox`.
 - **Nested zips** — a submission zip must have `index.html` at its root; files nested under a folder won't be found at `/submission/index.html`.
