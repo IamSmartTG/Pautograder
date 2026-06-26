@@ -31,6 +31,7 @@ cd frontend && npm install && npm run dev   # http://localhost:5173
 ```
 
 For Docker grading setup and generating the interactive baseline, see **[docs/RUNNING.md](docs/RUNNING.md)**.
+To deploy the full stack (UI + API + grading) on a free/cheap VM, see **[docs/DEPLOY.md](docs/DEPLOY.md)**.
 
 ## Project structure
 

@@ -1,0 +1,23 @@
+# Full-stack deploy. The backend grades by launching sibling containers on the
+# HOST Docker daemon (mounted socket), so the scratch dir must exist at the
+# SAME path on host and in the backend container — see docs/DEPLOY.md.
+
+services:
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      # Send tempfile.TemporaryDirectory() into the shared, host-matching path
+      - TMPDIR=/srv/pautograder/scratch
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /srv/pautograder/scratch:/srv/pautograder/scratch
+    # No published ports — only the web service talks to it.
+
+  web:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
