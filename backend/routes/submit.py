@@ -1,3 +1,4 @@
+import asyncio
 import json
 from pathlib import Path
 from typing import Optional
@@ -6,6 +7,7 @@ from security.firebomb import check_paste, check_upload
 from grader.algorithm import grade_algorithm
 from grader.interactive import grade_interactive
 from grader.webapp import grade_webapp
+from grader.sandbox import _executor
 
 router = APIRouter()
 PROBLEMS_DIR = Path(__file__).parent.parent / "problems"
@@ -15,7 +17,7 @@ def _load_problem(problem_id: str) -> tuple[dict, Path]:
         if d.is_dir():
             p = d / f"{problem_id}.json"
             if p.exists():
-                return json.loads(p.read_text()), d / problem_id
+                return json.loads(p.read_text()), d
     raise HTTPException(404, f"Problem '{problem_id}' not found")
 
 @router.post("/submit/{problem_id}")
@@ -37,15 +39,17 @@ async def submit(
     else:
         content = await file.read()
         check_upload(file.filename, content)
-        submission_files = {file.filename: content}
+        safe_name = Path(file.filename).name  # strips any ../ components
+        submission_files = {safe_name: content}
 
     ptype = problem["type"]
+    loop = asyncio.get_event_loop()
     if ptype == "algorithm":
         code_str = code if code else content.decode("utf-8", errors="replace")
-        return grade_algorithm(problem, code_str)
+        return await loop.run_in_executor(_executor, grade_algorithm, problem, code_str)
     elif ptype == "interactive":
-        return grade_interactive(problem, problem_dir, submission_files)
+        return await loop.run_in_executor(_executor, grade_interactive, problem, problem_dir, submission_files)
     elif ptype == "webapp":
-        return grade_webapp(problem, problem_dir, submission_files)
+        return await loop.run_in_executor(_executor, grade_webapp, problem, problem_dir, submission_files)
     else:
         raise HTTPException(400, f"Unknown problem type: {ptype}")

@@ -15,10 +15,13 @@ export default function Submit() {
   const fileRef = useRef()
 
   useEffect(() => {
-    fetch(`/api/problems/${id}`).then(r => r.json()).then(data => {
-      if (data.detail) { nav('/'); return; }
-      setProblem(data)
-    })
+    fetch(`/api/problems/${id}`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.detail) { nav('/'); return; }
+        setProblem(data)
+      })
+      .catch(() => nav('/'))
   }, [id])
 
   function handleFileChange(e) {
@@ -42,7 +45,8 @@ export default function Submit() {
 
     try {
       const res = await fetch(`/api/submit/${id}`, { method: 'POST', body: form })
-      setResult(await res.json())
+      const data = await res.json()
+      setResult(res.ok ? data : { score: 0, passed: 0, total: 0, results: [], error: data.detail ?? 'Server error' })
     } finally {
       setLoading(false)
     }
