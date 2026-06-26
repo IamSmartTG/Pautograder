@@ -88,6 +88,11 @@ export default function Submit() {
                 <span style={{ color: '#6b7280' }}>Output</span>
                 <pre style={{ margin: 0, background: '#f3f4f6', padding: '6px 10px', borderRadius: 4, whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{ex.output}</pre>
               </div>
+              {ex.explanation && (
+                <div style={{ color: '#6b7280', fontSize: 13, marginTop: 6 }}>
+                  <span style={{ fontWeight: 600 }}>Explanation: </span>{ex.explanation}
+                </div>
+              )}
             </div>
           ))}
         </div>

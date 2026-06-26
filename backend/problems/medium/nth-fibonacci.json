@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "0",
-      "output": "0"
+      "output": "0",
+      "explanation": "F(0) = 0 in the sequence 0, 1, 1, 2, 3, 5, ..."
     },
     {
       "input": "1",
-      "output": "1"
+      "output": "1",
+      "explanation": "F(1) = 1 in the sequence 0, 1, 1, 2, 3, 5, ..."
     }
   ],
   "test_cases": [

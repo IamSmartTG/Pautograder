@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "2 7 11 15\n9",
-      "output": "0 1"
+      "output": "0 1",
+      "explanation": "nums[0] + nums[1] = 2 + 7 = 9."
     },
     {
       "input": "3 2 4\n6",
-      "output": "1 2"
+      "output": "1 2",
+      "explanation": "nums[1] + nums[2] = 2 + 4 = 6."
     }
   ],
   "test_cases": [

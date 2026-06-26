@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "abcabcbb",
-      "output": "3"
+      "output": "3",
+      "explanation": "The longest stretch of \"abcabcbb\" with no repeated character is 3 long."
     },
     {
       "input": "bbbbb",
-      "output": "1"
+      "output": "1",
+      "explanation": "The longest stretch of \"bbbbb\" with no repeated character is 1 long."
     }
   ],
   "test_cases": [

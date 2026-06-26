@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "()",
-      "output": "true"
+      "output": "true",
+      "explanation": "Every bracket in \"()\" is closed by the right type in the correct order."
     },
     {
       "input": "()[]{}",
-      "output": "true"
+      "output": "true",
+      "explanation": "Every bracket in \"()[]{}\" is closed by the right type in the correct order."
     }
   ],
   "test_cases": [

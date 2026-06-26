@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "horse\nros",
-      "output": "3"
+      "output": "3",
+      "explanation": "Transforming the first string into the second needs a minimum of 3 edit(s)."
     },
     {
       "input": "intention\nexecution",
-      "output": "5"
+      "output": "5",
+      "explanation": "Transforming the first string into the second needs a minimum of 5 edit(s)."
     }
   ],
   "test_cases": [

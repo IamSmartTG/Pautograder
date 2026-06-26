@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "3 7 2 8 5",
-      "output": "8"
+      "output": "8",
+      "explanation": "8 is the largest number in the list."
     },
     {
       "input": "-1 -5 -2",
-      "output": "-1"
+      "output": "-1",
+      "explanation": "-1 is the largest number in the list."
     }
   ],
   "test_cases": [

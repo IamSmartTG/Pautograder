@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "5",
-      "output": "1\n2\nFizz\n4\nBuzz"
+      "output": "1\n2\nFizz\n4\nBuzz",
+      "explanation": "For 1 to 5: multiples of 3 become Fizz, of 5 become Buzz, of both FizzBuzz; others stay as the number."
     },
     {
       "input": "15",
-      "output": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz"
+      "output": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz",
+      "explanation": "For 1 to 15: multiples of 3 become Fizz, of 5 become Buzz, of both FizzBuzz; others stay as the number."
     }
   ],
   "test_cases": [

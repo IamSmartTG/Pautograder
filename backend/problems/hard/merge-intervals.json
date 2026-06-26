@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "3\n1 3\n2 6\n8 10",
-      "output": "2"
+      "output": "2",
+      "explanation": "After merging all overlapping intervals, 2 interval(s) remain."
     },
     {
       "input": "2\n1 4\n5 6",
-      "output": "2"
+      "output": "2",
+      "explanation": "After merging all overlapping intervals, 2 interval(s) remain."
     }
   ],
   "test_cases": [

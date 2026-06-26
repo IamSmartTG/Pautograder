@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "hello world",
-      "output": "hello world"
+      "output": "hello world",
+      "explanation": "The program prints the input line exactly as received."
     },
     {
       "input": "42",
-      "output": "42"
+      "output": "42",
+      "explanation": "The program prints the input line exactly as received."
     }
   ],
   "test_cases": [

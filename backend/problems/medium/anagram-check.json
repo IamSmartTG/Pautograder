@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "listen\nsilent",
-      "output": "true"
+      "output": "true",
+      "explanation": "\"listen\" and \"silent\" use exactly the same letters, so they are anagrams."
     },
     {
       "input": "hello\nworld",
-      "output": "false"
+      "output": "false",
+      "explanation": "\"hello\" and \"world\" are not anagrams."
     }
   ],
   "test_cases": [

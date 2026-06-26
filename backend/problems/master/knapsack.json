@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "50\n10 20 30\n60 100 120",
-      "output": "220"
+      "output": "220",
+      "explanation": "The most valuable set of items that fits the capacity is worth 220."
     },
     {
       "input": "10\n5 4 6 3\n10 40 30 50",
-      "output": "90"
+      "output": "90",
+      "explanation": "The most valuable set of items that fits the capacity is worth 90."
     }
   ],
   "test_cases": [

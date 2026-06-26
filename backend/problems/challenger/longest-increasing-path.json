@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "3 3\n9 9 4\n6 6 8\n2 1 1",
-      "output": "4"
+      "output": "4",
+      "explanation": "The longest path of strictly increasing adjacent cells has length 4."
     },
     {
       "input": "3 3\n3 4 5\n3 2 6\n2 2 1",
-      "output": "4"
+      "output": "4",
+      "explanation": "The longest path of strictly increasing adjacent cells has length 4."
     }
   ],
   "test_cases": [

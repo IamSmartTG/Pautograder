@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "4\n0 10 15 20\n10 0 35 25\n15 35 0 30\n20 25 30 0",
-      "output": "80"
+      "output": "80",
+      "explanation": "The cheapest route from city 0 visiting every city once and returning costs 80."
     },
     {
       "input": "1\n0",
-      "output": "0"
+      "output": "0",
+      "explanation": "The cheapest route from city 0 visiting every city once and returning costs 0."
     }
   ],
   "test_cases": [

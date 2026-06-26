@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "1 2 3 4 5\n2",
-      "output": "4 5 1 2 3"
+      "output": "4 5 1 2 3",
+      "explanation": "Each element shifts 2 place(s) right; the last 2 wrap to the front."
     },
     {
       "input": "1 2 3\n0",
-      "output": "1 2 3"
+      "output": "1 2 3",
+      "explanation": "k = 0, so the array is unchanged."
     }
   ],
   "test_cases": [

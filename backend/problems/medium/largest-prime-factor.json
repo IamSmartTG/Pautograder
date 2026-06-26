@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "12",
-      "output": "3"
+      "output": "3",
+      "explanation": "The largest prime that divides 12 is 3."
     },
     {
       "input": "17",
-      "output": "17"
+      "output": "17",
+      "explanation": "The largest prime that divides 17 is 17."
     }
   ],
   "test_cases": [

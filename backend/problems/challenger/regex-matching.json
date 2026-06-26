@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "aa\na",
-      "output": "false"
+      "output": "false",
+      "explanation": "Pattern \"a\" does not fully match \"aa\"."
     },
     {
       "input": "aa\na*",
-      "output": "true"
+      "output": "true",
+      "explanation": "Pattern \"a*\" fully matches \"aa\"."
     }
   ],
   "test_cases": [

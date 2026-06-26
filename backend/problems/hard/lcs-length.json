@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "abcde\nace",
-      "output": "3"
+      "output": "3",
+      "explanation": "The longest subsequence common to both strings has length 3."
     },
     {
       "input": "abc\nabc",
-      "output": "3"
+      "output": "3",
+      "explanation": "The longest subsequence common to both strings has length 3."
     }
   ],
   "test_cases": [

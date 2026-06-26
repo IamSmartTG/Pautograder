@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "1",
-      "output": "1"
+      "output": "1",
+      "explanation": "There are 1 distinct ways to place 1 non-attacking queens."
     },
     {
       "input": "4",
-      "output": "2"
+      "output": "2",
+      "explanation": "There are 2 distinct ways to place 4 non-attacking queens."
     }
   ],
   "test_cases": [

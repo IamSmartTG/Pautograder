@@ -7,11 +7,13 @@
   "examples": [
     {
       "input": "hello world",
-      "output": "3"
+      "output": "3",
+      "explanation": "\"hello world\" contains 3 vowel(s)."
     },
     {
       "input": "AEIOU",
-      "output": "5"
+      "output": "5",
+      "explanation": "\"AEIOU\" contains 5 vowel(s)."
     }
   ],
   "test_cases": [
