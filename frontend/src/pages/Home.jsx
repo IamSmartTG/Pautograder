@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import ProblemCard from '../components/ProblemCard'
 
-const DIFFICULTIES = ['all', 'easy', 'medium', 'hard', 'expert', 'master', 'challenger']
+const DIFFICULTIES = ['all', 'easy', 'medium', 'hard', 'expert', 'master', 'challenger', 'sovereign']
 const TYPES = ['all', 'algorithm', 'interactive', 'webapp']
 
 function FilterBtn({ label, active, onClick }) {

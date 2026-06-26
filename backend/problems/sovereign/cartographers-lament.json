@@ -1,0 +1,42 @@
+{
+  "id": "cartographers-lament",
+  "title": "The Cartographer's Lament: An Enumeration of Unique Inscriptions",
+  "difficulty": "sovereign",
+  "type": "algorithm",
+  "description": "Presented is a single sacred inscription S. A 'fragment' shall denote any contiguous and non-empty excerpt drawn therefrom. Two fragments are adjudged ONE AND THE SAME if, and only if, they read precisely alike \u2014 character for character \u2014 irrespective of the station within the inscription whence each was excised. Thy charge: pronounce the cardinality of the set of all mutually-distinct fragments. (The naive may enumerate; the wise shall summon an automaton of suffixes. Either way, the road is long.)",
+  "examples": [
+    {
+      "input": "abab",
+      "output": "7",
+      "explanation": "From 'abab' issue ten contiguous excerpts, yet the herald tallieth only the unalike: the singletons 'a' and 'b'; the pairs 'ab' (twice begotten, but once inscribed in the ledger) and 'ba'; the triples 'aba' and 'bab'; and the inscription entire, 'abab'. Seven fragments distinct, the second 'ab' having been struck out as a mere echo."
+    },
+    {
+      "input": "aaa",
+      "output": "3",
+      "explanation": "Behold 'aaa', deceptive in its uniformity: though six excerpts may be cut from it, they collapse \u2014 by the law of identical reading \u2014 into but THREE distinct fragments: 'a', 'aa', and 'aaa'. The duplicates dissolve like morning frost."
+    }
+  ],
+  "test_cases": [
+    {
+      "input": "abab",
+      "expected": "7"
+    },
+    {
+      "input": "aaa",
+      "expected": "3"
+    },
+    {
+      "input": "abc",
+      "expected": "6"
+    },
+    {
+      "input": "banana",
+      "expected": "15"
+    },
+    {
+      "input": "mississippi",
+      "expected": "53"
+    }
+  ],
+  "time_limit_seconds": 15
+}

@@ -1,0 +1,54 @@
+{
+  "id": "vanishing-hoard",
+  "title": "The Sovereign's Wager upon the Vanishing Hoard",
+  "difficulty": "sovereign",
+  "type": "algorithm",
+  "description": "Hearken! Within the Royal Vault reposeth a hoard of N golden sovereigns. By ancient and immutable decree, two adversaries \u2014 the reigning Sovereign, who graciously moveth first, and the scheming Usurper \u2014 shall in strict and unbroken alternation diminish this hoard. Upon each turn the acting party is bound, by Crown and by Conscience, to abscond with a quantity of coin that is a PERFECT SQUARE (to wit: one of 1, 4, 9, 16, 25, and so onward unto infinitude), provided always that such quantity exceedeth not the hoard then remaining. That wretch who, summoned to act before a vault already barren, can perform no lawful sequestration whatsoever is, by the same decree, unmade, and forfeiteth all honour. Presuming both parties to contend with flawless and merciless cunning, pronounce the victor: print 'Sovereign' should the first mover prevail, or 'Usurper' should fortune crown the second. The input is the lone integer N.",
+  "examples": [
+    {
+      "input": "5",
+      "output": "Usurper",
+      "explanation": "Five sovereigns yield a forked perdition. The first mover may filch the unit (leaving four \u2014 a square most seductive) or seize the tetrad entire (leaving the unit). Yet mark the symmetry of doom: seize the tetrad, and the Usurper claimeth the orphaned unit and triumpheth; filch the unit instead, and the Usurper, confronting four, devoureth the whole square and likewise leaveth the coffer barren before the first mover's despairing return. Every avenue terminateth in ruin; ergo, the Usurper."
+    },
+    {
+      "input": "17",
+      "output": "Usurper",
+      "explanation": "Seventeen presenteth a labyrinth of ruinous depth: a thicket of units, tetrads, novenaries, and the sixteen-fold square, branching beyond the patience of mortal men. Exhaustive descent \u2014 which the damned alone shall undertake \u2014 proveth that NO opening sequestration availeth the first mover, each path coiling inexorably toward their undoing. Thus, once more: Usurper."
+    }
+  ],
+  "test_cases": [
+    {
+      "input": "5",
+      "expected": "Usurper"
+    },
+    {
+      "input": "17",
+      "expected": "Usurper"
+    },
+    {
+      "input": "0",
+      "expected": "Usurper"
+    },
+    {
+      "input": "1",
+      "expected": "Sovereign"
+    },
+    {
+      "input": "2",
+      "expected": "Usurper"
+    },
+    {
+      "input": "4",
+      "expected": "Sovereign"
+    },
+    {
+      "input": "100",
+      "expected": "Sovereign"
+    },
+    {
+      "input": "1000",
+      "expected": "Sovereign"
+    }
+  ],
+  "time_limit_seconds": 15
+}
