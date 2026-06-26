@@ -12,8 +12,8 @@ daemon, so the per-submission grading containers work — unlike Render/Cloudfla
    browser image takes a few minutes the first time).
 3. Run the app in two terminals:
    ```bash
-   cd backend  && uvicorn main:app --port 8000     # terminal 1
-   cd frontend && npm run dev                       # terminal 2
+   cd backend  && python -m uvicorn main:app --port 8000   # terminal 1
+   cd frontend && npm run dev                              # terminal 2
    ```
 4. Open the forwarded **port 5173** ("Pautograder UI"). Make it Public in the
    Ports tab if you want to share the URL.
