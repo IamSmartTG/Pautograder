@@ -1,0 +1,12 @@
+{
+  "id": "algo-005",
+  "title": "FizzBuzz",
+  "difficulty": "master",
+  "type": "algorithm",
+  "description": "Read an integer N from stdin. Print FizzBuzz for numbers 1 to N: 'Fizz' if divisible by 3, 'Buzz' if by 5, 'FizzBuzz' if both, else the number itself. One number per line.",
+  "test_cases": [
+    { "input": "5", "expected": "1\n2\nFizz\n4\nBuzz" },
+    { "input": "15", "expected": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz" }
+  ],
+  "time_limit_seconds": 5
+}

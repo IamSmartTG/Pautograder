@@ -1,0 +1,15 @@
+{
+  "id": "algo-002",
+  "title": "Valid Parentheses",
+  "difficulty": "medium",
+  "type": "algorithm",
+  "description": "Given a string of brackets '(', ')', '{', '}', '[', ']', determine if it is valid. A valid string has every open bracket closed in correct order. Print 'true' or 'false'.",
+  "test_cases": [
+    { "input": "()", "expected": "true" },
+    { "input": "()[]{}", "expected": "true" },
+    { "input": "(]", "expected": "false" },
+    { "input": "([)]", "expected": "false" },
+    { "input": "{[]}", "expected": "true" }
+  ],
+  "time_limit_seconds": 10
+}

@@ -1,0 +1,13 @@
+{
+  "id": "algo-001",
+  "title": "Echo Input",
+  "difficulty": "easy",
+  "type": "algorithm",
+  "description": "Read a line from stdin and print it back exactly as-is.",
+  "test_cases": [
+    { "input": "hello world", "expected": "hello world" },
+    { "input": "42", "expected": "42" },
+    { "input": "Python is fun", "expected": "Python is fun" }
+  ],
+  "time_limit_seconds": 5
+}

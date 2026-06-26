@@ -1,0 +1,11 @@
+{
+  "id": "interactive-001",
+  "title": "Click Counter",
+  "difficulty": "easy",
+  "type": "interactive",
+  "description": "Build an HTML page with a button labeled 'Click me' and a counter that starts at 0. Each click increments the counter by 1. The counter value must be visible on the page.",
+  "playwright_script": "interactive-001/test.spec.js",
+  "screenshot_baseline": "interactive-001/baseline.png",
+  "diff_threshold": 0.05,
+  "time_limit_seconds": 20
+}

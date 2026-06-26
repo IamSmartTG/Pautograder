@@ -1,0 +1,9 @@
+{
+  "id": "webapp-001",
+  "title": "Todo List App",
+  "difficulty": "medium",
+  "type": "webapp",
+  "description": "Build a static HTML/CSS/JS todo list. Must have: an input field, an 'Add' button that appends the typed text as a list item, and each item must have a 'Delete' button that removes it. Submit as a zip containing index.html.",
+  "playwright_script": "webapp-001/test.spec.js",
+  "time_limit_seconds": 30
+}
