@@ -2,7 +2,29 @@
 
 Anonymous autograder: FastAPI backend grades submissions inside Docker, React/Vite frontend.
 
-## Prerequisites
+## GitHub Codespaces (easiest — free, no credit card, grading works)
+
+The repo ships a `.devcontainer/`. A Codespace is a Linux box with its own Docker
+daemon, so the per-submission grading containers work — unlike Render/Cloudflare.
+
+1. On GitHub: **Code ▸ Codespaces ▸ Create codespace on master**.
+2. Wait for setup to finish (it installs deps and builds the sandbox images — the
+   browser image takes a few minutes the first time).
+3. Run the app in two terminals:
+   ```bash
+   cd backend  && uvicorn main:app --port 8000     # terminal 1
+   cd frontend && npm run dev                       # terminal 2
+   ```
+4. Open the forwarded **port 5173** ("Pautograder UI"). Make it Public in the
+   Ports tab if you want to share the URL.
+
+Note: Codespaces auto-suspend when idle and the free tier has a monthly hour cap —
+great for dev/demo, not a 24/7 public server. For always-on hosting see
+[DEPLOY.md](DEPLOY.md).
+
+---
+
+## Prerequisites (local)
 
 - Python 3.11+
 - Node.js 18+

@@ -1,0 +1,14 @@
+{
+  "name": "Pautograder",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" }
+  },
+  "forwardPorts": [5173, 8000],
+  "portsAttributes": {
+    "5173": { "label": "Pautograder UI", "onAutoForward": "openPreview" },
+    "8000": { "label": "Backend API" }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh"
+}
