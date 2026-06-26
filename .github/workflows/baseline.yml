@@ -44,7 +44,7 @@ jobs:
           docker run --rm --shm-size=512m \
             -v "$GITHUB_WORKSPACE/gen:/submission" -w /submission \
             pautograder-browser-sandbox \
-            npx playwright test test.spec.js \
+            playwright test test.spec.js \
             --config=/submission/playwright.config.js --update-snapshots
 
       - name: Copy baseline into the problem

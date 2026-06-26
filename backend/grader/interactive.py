@@ -35,7 +35,7 @@ def grade_interactive(problem: dict, problem_dir: Path, files: dict[str, bytes])
 
     output = run_in_sandbox(
         image=BROWSER_IMAGE,
-        command=["npx", "playwright", "test", f"/submission/{script_name}",
+        command=["playwright", "test", f"/submission/{script_name}",
                  "--config=/submission/playwright.config.js", "--reporter=json"],
         files=submission,
         timeout=problem.get("time_limit_seconds", 30),

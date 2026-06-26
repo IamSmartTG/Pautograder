@@ -102,7 +102,7 @@ cp backend/problems/easy/interactive-001/test.spec.js ref-counter/
 
 docker run --rm -v "$(pwd)/ref-counter:/submission" -w /submission \
   pautograder-browser-sandbox \
-  npx playwright test test.spec.js --config=/submission/playwright.config.js --update-snapshots
+  playwright test test.spec.js --config=/submission/playwright.config.js --update-snapshots
 ```
 
 That writes `ref-counter/__screenshots__/baseline.png`. Copy it into the problem so the grader uses it (`screenshot_baseline` in `interactive-001.json` points here):
