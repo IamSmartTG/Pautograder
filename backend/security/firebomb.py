@@ -1,4 +1,5 @@
 import io, zipfile, tarfile
+from pathlib import PurePosixPath
 from fastapi import HTTPException
 
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024   # 10MB
@@ -40,3 +41,32 @@ def _assert_limits(compressed: int, decompressed: int) -> None:
         raise HTTPException(413, "Archive expands beyond 50MB limit")
     if compressed > 0 and decompressed / compressed > MAX_RATIO:
         raise HTTPException(413, "Suspicious compression ratio — possible zip bomb")
+
+def _safe_member_name(raw: str) -> str | None:
+    # Normalize, then reject absolute paths and parent-dir escapes (zip-slip).
+    p = PurePosixPath(raw.replace("\\", "/"))
+    if p.is_absolute():
+        return None
+    parts = [seg for seg in p.parts if seg not in ("", ".")]
+    if any(seg == ".." for seg in parts):
+        return None
+    return "/".join(parts) if parts else None
+
+def safe_extract_zip(content: bytes) -> dict[str, bytes]:
+    """Extract a (pre-validated) zip into {relative_path: bytes}, guarding
+    against zip-slip and lying-header bombs by capping bytes actually read."""
+    out: dict[str, bytes] = {}
+    total = 0
+    with zipfile.ZipFile(io.BytesIO(content)) as zf:
+        for info in zf.infolist():
+            if info.is_dir():
+                continue
+            name = _safe_member_name(info.filename)
+            if name is None:
+                continue  # skip entries that escape the extraction root
+            data = zf.read(info)
+            total += len(data)
+            if total > MAX_DECOMPRESSED_BYTES:
+                raise HTTPException(413, "Archive expands beyond 50MB limit")
+            out[name] = data
+    return out

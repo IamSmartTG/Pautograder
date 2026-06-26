@@ -12,10 +12,20 @@ def grade_interactive(problem: dict, problem_dir: Path, files: dict[str, bytes])
     """
     script_name = Path(problem["playwright_script"]).name
     baseline_name = Path(problem["screenshot_baseline"]).name
+    threshold = problem.get("diff_threshold", 0.05)
 
     submission = dict(files)
     submission[script_name] = (problem_dir / problem["playwright_script"]).read_bytes()
-    submission[f"__screenshots__/{script_name}/{baseline_name}"] = (
+    # Pin a deterministic, platform-independent snapshot path so the shipped
+    # baseline is found — Playwright's default appends a platform suffix we
+    # can't predict from here.
+    submission["playwright.config.js"] = (
+        "module.exports = {\n"
+        "  snapshotPathTemplate: '{testFileDir}/__screenshots__/{arg}{ext}',\n"
+        f"  expect: {{ toHaveScreenshot: {{ maxDiffPixelRatio: {threshold} }} }},\n"
+        "};\n"
+    ).encode()
+    submission[f"__screenshots__/{baseline_name}"] = (
         problem_dir / problem["screenshot_baseline"]
     ).read_bytes()
 

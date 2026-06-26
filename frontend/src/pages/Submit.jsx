@@ -20,6 +20,8 @@ export default function Submit() {
       .then(data => {
         if (data.detail) { nav('/'); return; }
         setProblem(data)
+        // Interactive/webapp need real files (index.html); paste only fits algorithm
+        setTab(data.type === 'algorithm' ? 'paste' : 'upload')
       })
       .catch(() => nav('/'))
   }, [id])
@@ -76,7 +78,7 @@ export default function Submit() {
       <p style={{ lineHeight: 1.6, marginBottom: 24 }}>{problem.description}</p>
 
       <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
-        <TabBtn t="paste" label="Paste Code" />
+        {problem.type === 'algorithm' && <TabBtn t="paste" label="Paste Code" />}
         <TabBtn t="upload" label="Upload File" />
       </div>
 
@@ -98,7 +100,9 @@ export default function Submit() {
               textAlign: 'center', cursor: 'pointer', color: '#6b7280'
             }}
           >
-            {file ? `📄 ${file.name}` : 'Click to select a file (max 10MB)'}
+            {file ? `📄 ${file.name}` : (problem.type === 'algorithm'
+              ? 'Click to select your solution file (max 10MB)'
+              : 'Click to select a .zip containing index.html (max 10MB)')}
           </div>
           <input ref={fileRef} type="file" onChange={handleFileChange} style={{ display: 'none' }} />
           {fileError && <p style={{ color: '#dc2626', marginTop: 6, fontSize: 13 }}>{fileError}</p>}

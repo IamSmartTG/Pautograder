@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from typing import Optional
 from fastapi import APIRouter, HTTPException, UploadFile, File, Form
-from security.firebomb import check_paste, check_upload
+from security.firebomb import check_paste, check_upload, safe_extract_zip
 from grader.algorithm import grade_algorithm
 from grader.interactive import grade_interactive
 from grader.webapp import grade_webapp
@@ -39,8 +39,14 @@ async def submit(
     else:
         content = await file.read()
         check_upload(file.filename, content)
-        safe_name = Path(file.filename).name  # strips any ../ components
-        submission_files = {safe_name: content}
+        if (file.filename or "").lower().endswith(".zip"):
+            # Extract so index.html etc. land directly in the sandbox tree
+            submission_files = safe_extract_zip(content)
+            if not submission_files:
+                raise HTTPException(400, "Zip archive contains no usable files")
+        else:
+            safe_name = Path(file.filename).name  # strips any ../ components
+            submission_files = {safe_name: content}
 
     ptype = problem["type"]
     loop = asyncio.get_event_loop()

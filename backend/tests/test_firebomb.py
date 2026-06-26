@@ -1,6 +1,6 @@
 import io, zipfile, pytest
 from fastapi import HTTPException
-from security.firebomb import check_paste, check_upload
+from security.firebomb import check_paste, check_upload, safe_extract_zip
 
 def test_paste_ok():
     check_paste("x" * 100)  # should not raise
@@ -28,4 +28,26 @@ def test_zip_bomb_detected():
         zf.writestr("bomb.txt", b"\x00" * (51 * 1024 * 1024))
     with pytest.raises(HTTPException) as exc:
         check_upload("bomb.zip", buf.getvalue())
+    assert exc.value.status_code == 413
+
+def _zip(entries):
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED) as zf:
+        for name, data in entries.items():
+            zf.writestr(name, data)
+    return buf.getvalue()
+
+def test_extract_returns_files():
+    out = safe_extract_zip(_zip({"index.html": "<h1>hi</h1>", "app.js": "x=1"}))
+    assert out == {"index.html": b"<h1>hi</h1>", "app.js": b"x=1"}
+
+def test_extract_skips_zip_slip():
+    out = safe_extract_zip(_zip({"../../etc/passwd": "root", "ok.html": "safe"}))
+    assert "ok.html" in out
+    assert all(".." not in k and not k.startswith("/") for k in out)
+
+def test_extract_caps_decompressed_bomb():
+    # Lying-header bomb: real decompressed bytes exceed the 50MB cap
+    with pytest.raises(HTTPException) as exc:
+        safe_extract_zip(_zip({"big.txt": b"\x00" * (51 * 1024 * 1024)}))
     assert exc.value.status_code == 413
