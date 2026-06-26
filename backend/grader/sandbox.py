@@ -34,6 +34,10 @@ def run_in_sandbox(
                 cpu_quota=50000,
                 network_mode=network,
                 pids_limit=64,
+                # ponytail: safe hardening only. cap_drop=ALL / non-root / read-only
+                # rootfs deferred — they can break Chromium's sandbox + Playwright
+                # writes and need a Docker test pass before enabling.
+                security_opt=["no-new-privileges:true"],
                 detach=True,
                 remove=False,
             )
