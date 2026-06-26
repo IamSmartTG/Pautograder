@@ -4,6 +4,16 @@
   "difficulty": "medium",
   "type": "algorithm",
   "description": "Read an integer n and print the nth Fibonacci number (F(0)=0, F(1)=1).",
+  "examples": [
+    {
+      "input": "0",
+      "output": "0"
+    },
+    {
+      "input": "1",
+      "output": "1"
+    }
+  ],
   "test_cases": [
     {
       "input": "0",

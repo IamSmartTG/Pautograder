@@ -4,6 +4,16 @@
   "difficulty": "expert",
   "type": "algorithm",
   "description": "Line 1: a target string. Line 2: space-separated dictionary words. Print 'true' if the target can be segmented into a sequence of dictionary words (each usable any number of times), else 'false'.",
+  "examples": [
+    {
+      "input": "leetcode\nleet code",
+      "output": "true"
+    },
+    {
+      "input": "applepenapple\napple pen",
+      "output": "true"
+    }
+  ],
   "test_cases": [
     {
       "input": "leetcode\nleet code",

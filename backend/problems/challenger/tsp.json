@@ -4,6 +4,16 @@
   "difficulty": "challenger",
   "type": "algorithm",
   "description": "Line 1: integer n (number of cities). Next n lines: an n x n symmetric distance matrix (space-separated). Print the minimum cost of a tour that starts at city 0, visits every city exactly once, and returns to city 0. (Held-Karp DP \u2014 exponential in n.)",
+  "examples": [
+    {
+      "input": "4\n0 10 15 20\n10 0 35 25\n15 35 0 30\n20 25 30 0",
+      "output": "80"
+    },
+    {
+      "input": "1\n0",
+      "output": "0"
+    }
+  ],
   "test_cases": [
     {
       "input": "4\n0 10 15 20\n10 0 35 25\n15 35 0 30\n20 25 30 0",

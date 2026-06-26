@@ -77,6 +77,22 @@ export default function Submit() {
       </p>
       <p style={{ lineHeight: 1.6, marginBottom: 24 }}>{problem.description}</p>
 
+      {problem.examples && problem.examples.length > 0 && (
+        <div style={{ marginBottom: 24 }}>
+          {problem.examples.map((ex, i) => (
+            <div key={i} style={{ marginBottom: 12 }}>
+              <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 4 }}>Example {i + 1}</div>
+              <div style={{ display: 'grid', gridTemplateColumns: '64px 1fr', gap: 8, alignItems: 'start', fontSize: 13 }}>
+                <span style={{ color: '#6b7280' }}>Input</span>
+                <pre style={{ margin: 0, background: '#f3f4f6', padding: '6px 10px', borderRadius: 4, whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{ex.input}</pre>
+                <span style={{ color: '#6b7280' }}>Output</span>
+                <pre style={{ margin: 0, background: '#f3f4f6', padding: '6px 10px', borderRadius: 4, whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{ex.output}</pre>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
         {problem.type === 'algorithm' && <TabBtn t="paste" label="Paste Code" />}
         <TabBtn t="upload" label="Upload File" />

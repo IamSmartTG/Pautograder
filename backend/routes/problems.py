@@ -44,4 +44,4 @@ def get_problem(problem_id: str):
         raise HTTPException(404, f"Problem '{problem_id}' not found")
     data = _load_full(path)
     # Strip internal grading details (test_cases, etc.)
-    return {k: data[k] for k in ("id", "title", "difficulty", "type", "description", "time_limit_seconds") if k in data}
+    return {k: data[k] for k in ("id", "title", "difficulty", "type", "description", "examples", "time_limit_seconds") if k in data}

@@ -4,6 +4,16 @@
   "difficulty": "challenger",
   "type": "algorithm",
   "description": "Line 1: input string s. Line 2: a pattern p supporting '.' (any single char) and '*' (zero or more of the preceding element). Print 'true' if p matches the ENTIRE string s, else 'false'.",
+  "examples": [
+    {
+      "input": "aa\na",
+      "output": "false"
+    },
+    {
+      "input": "aa\na*",
+      "output": "true"
+    }
+  ],
   "test_cases": [
     {
       "input": "aa\na",

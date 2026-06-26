@@ -4,6 +4,16 @@
   "difficulty": "hard",
   "type": "algorithm",
   "description": "Line 1: a sorted (ascending) list of space-separated integers. Line 2: a target integer. Print the 0-based index of the target, or -1 if absent.",
+  "examples": [
+    {
+      "input": "1 3 5 7 9\n5",
+      "output": "2"
+    },
+    {
+      "input": "1 3 5 7 9\n6",
+      "output": "-1"
+    }
+  ],
   "test_cases": [
     {
       "input": "1 3 5 7 9\n5",

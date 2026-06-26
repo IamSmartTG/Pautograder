@@ -4,6 +4,16 @@
   "difficulty": "medium",
   "type": "algorithm",
   "description": "Read an integer and print 'true' if it reads the same forwards and backwards, else 'false'. Negative numbers are never palindromes.",
+  "examples": [
+    {
+      "input": "121",
+      "output": "true"
+    },
+    {
+      "input": "-121",
+      "output": "false"
+    }
+  ],
   "test_cases": [
     {
       "input": "121",

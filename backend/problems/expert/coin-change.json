@@ -4,6 +4,16 @@
   "difficulty": "expert",
   "type": "algorithm",
   "description": "Line 1: space-separated coin denominations. Line 2: a target amount. Print the minimum number of coins to make the amount, or -1 if impossible.",
+  "examples": [
+    {
+      "input": "1 2 5\n11",
+      "output": "3"
+    },
+    {
+      "input": "2\n3",
+      "output": "-1"
+    }
+  ],
   "test_cases": [
     {
       "input": "1 2 5\n11",

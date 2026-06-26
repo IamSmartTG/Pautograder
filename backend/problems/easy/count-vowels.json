@@ -4,6 +4,16 @@
   "difficulty": "easy",
   "type": "algorithm",
   "description": "Read one line of text and print the number of vowels (a, e, i, o, u, case-insensitive).",
+  "examples": [
+    {
+      "input": "hello world",
+      "output": "3"
+    },
+    {
+      "input": "AEIOU",
+      "output": "5"
+    }
+  ],
   "test_cases": [
     {
       "input": "hello world",

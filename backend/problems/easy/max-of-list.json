@@ -4,6 +4,16 @@
   "difficulty": "easy",
   "type": "algorithm",
   "description": "Read a line of space-separated integers and print the largest.",
+  "examples": [
+    {
+      "input": "3 7 2 8 5",
+      "output": "8"
+    },
+    {
+      "input": "-1 -5 -2",
+      "output": "-1"
+    }
+  ],
   "test_cases": [
     {
       "input": "3 7 2 8 5",

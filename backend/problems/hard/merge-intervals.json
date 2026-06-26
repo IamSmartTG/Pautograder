@@ -4,6 +4,16 @@
   "difficulty": "hard",
   "type": "algorithm",
   "description": "Line 1: integer n. Next n lines: two integers 'start end'. Print how many intervals remain after merging all overlapping ones.",
+  "examples": [
+    {
+      "input": "3\n1 3\n2 6\n8 10",
+      "output": "2"
+    },
+    {
+      "input": "2\n1 4\n5 6",
+      "output": "2"
+    }
+  ],
   "test_cases": [
     {
       "input": "3\n1 3\n2 6\n8 10",

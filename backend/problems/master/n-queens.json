@@ -4,6 +4,16 @@
   "difficulty": "master",
   "type": "algorithm",
   "description": "Read an integer n and print the number of distinct ways to place n non-attacking queens on an n x n board.",
+  "examples": [
+    {
+      "input": "1",
+      "output": "1"
+    },
+    {
+      "input": "4",
+      "output": "2"
+    }
+  ],
   "test_cases": [
     {
       "input": "1",

@@ -4,6 +4,16 @@
   "difficulty": "easy",
   "type": "algorithm",
   "description": "Read one line of text and print it reversed.",
+  "examples": [
+    {
+      "input": "hello",
+      "output": "olleh"
+    },
+    {
+      "input": "racecar",
+      "output": "racecar"
+    }
+  ],
   "test_cases": [
     {
       "input": "hello",

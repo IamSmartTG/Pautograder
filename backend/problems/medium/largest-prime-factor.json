@@ -4,6 +4,16 @@
   "difficulty": "medium",
   "type": "algorithm",
   "description": "Read an integer n (n >= 2) and print its largest prime factor.",
+  "examples": [
+    {
+      "input": "12",
+      "output": "3"
+    },
+    {
+      "input": "17",
+      "output": "17"
+    }
+  ],
   "test_cases": [
     {
       "input": "12",

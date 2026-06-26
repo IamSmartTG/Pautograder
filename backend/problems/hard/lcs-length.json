@@ -4,6 +4,16 @@
   "difficulty": "hard",
   "type": "algorithm",
   "description": "Read two strings on two lines. Print the length of their longest common subsequence.",
+  "examples": [
+    {
+      "input": "abcde\nace",
+      "output": "3"
+    },
+    {
+      "input": "abc\nabc",
+      "output": "3"
+    }
+  ],
   "test_cases": [
     {
       "input": "abcde\nace",

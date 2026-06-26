@@ -4,6 +4,16 @@
   "difficulty": "medium",
   "type": "algorithm",
   "description": "Read two strings on two separate lines. Print 'true' if they are anagrams of each other, else 'false'.",
+  "examples": [
+    {
+      "input": "listen\nsilent",
+      "output": "true"
+    },
+    {
+      "input": "hello\nworld",
+      "output": "false"
+    }
+  ],
   "test_cases": [
     {
       "input": "listen\nsilent",

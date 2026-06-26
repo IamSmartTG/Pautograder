@@ -4,6 +4,16 @@
   "difficulty": "expert",
   "type": "algorithm",
   "description": "Read two strings on two lines (either may be empty). Print the minimum number of single-character insertions, deletions, or substitutions to turn the first into the second.",
+  "examples": [
+    {
+      "input": "horse\nros",
+      "output": "3"
+    },
+    {
+      "input": "intention\nexecution",
+      "output": "5"
+    }
+  ],
   "test_cases": [
     {
       "input": "horse\nros",

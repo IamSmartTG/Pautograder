@@ -4,6 +4,16 @@
   "difficulty": "medium",
   "type": "algorithm",
   "description": "Line 1: space-separated integers. Line 2: an integer k. Print the array rotated to the right by k positions, space-separated.",
+  "examples": [
+    {
+      "input": "1 2 3 4 5\n2",
+      "output": "4 5 1 2 3"
+    },
+    {
+      "input": "1 2 3\n0",
+      "output": "1 2 3"
+    }
+  ],
   "test_cases": [
     {
       "input": "1 2 3 4 5\n2",
