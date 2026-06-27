@@ -4,14 +4,10 @@ import ProblemCard from '../components/ProblemCard'
 const DIFFICULTIES = ['all', 'easy', 'medium', 'hard', 'expert', 'master', 'challenger', 'sovereign']
 const TYPES = ['all', 'algorithm', 'interactive', 'webapp']
 
-function FilterBtn({ label, active, onClick }) {
+function Chip({ label, active, onClick }) {
   return (
-    <button onClick={onClick} style={{
-      padding: '4px 12px', border: 'none', borderRadius: 4, cursor: 'pointer',
-      background: active ? '#3b82f6' : '#e5e7eb',
-      color: active ? '#fff' : '#374151', fontWeight: active ? 600 : 400
-    }}>
-      {label[0].toUpperCase() + label.slice(1)}
+    <button className={active ? 'chip chip--on' : 'chip'} onClick={onClick}>
+      {label}
     </button>
   )
 }
@@ -22,7 +18,7 @@ export default function Home() {
   const [type, setType] = useState('all')
 
   useEffect(() => {
-    fetch('/api/problems').then(r => r.json()).then(setProblems)
+    fetch('/api/problems').then(r => r.json()).then(setProblems).catch(() => {})
   }, [])
 
   const visible = problems.filter(p =>
@@ -30,24 +26,34 @@ export default function Home() {
     (type === 'all' || p.type === type)
   )
 
+  function reset() { setDiff('all'); setType('all') }
+
   return (
-    <div style={{ maxWidth: 1100, margin: '0 auto', padding: 24 }}>
-      <h1 style={{ marginBottom: 4 }}>Pautograder</h1>
-      <p style={{ color: '#6b7280', marginBottom: 20 }}>Submit your solution and get instant feedback.</p>
+    <main className="page">
+      <p className="eyebrow">// {problems.length} problems · no account needed</p>
+      <h1 className="title">Run your code. Get graded.</h1>
+      <p className="lead comment">// pick a problem, submit a solution, watch it run in a sandbox</p>
 
-      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 20 }}>
-        {DIFFICULTIES.map(d => <FilterBtn key={d} label={d} active={diff === d} onClick={() => setDiff(d)} />)}
-        <span style={{ color: '#d1d5db', margin: '0 4px' }}>|</span>
-        {TYPES.map(t => <FilterBtn key={t} label={t} active={type === t} onClick={() => setType(t)} />)}
+      <div className="filters">
+        <div className="filter-group">
+          {DIFFICULTIES.map(d => <Chip key={d} label={d} active={diff === d} onClick={() => setDiff(d)} />)}
+        </div>
+        <span className="filter-sep" />
+        <div className="filter-group">
+          {TYPES.map(t => <Chip key={t} label={t} active={type === t} onClick={() => setType(t)} />)}
+        </div>
       </div>
 
-      {visible.length === 0 && (
-        <p style={{ color: '#9ca3af' }}>No problems match these filters.</p>
+      {visible.length === 0 ? (
+        <div className="empty">
+          <b>No problems match these filters.</b>{' '}
+          <button className="linklike" onClick={reset}>Clear filters</button>
+        </div>
+      ) : (
+        <div className="grid">
+          {visible.map(p => <ProblemCard key={p.id} problem={p} />)}
+        </div>
       )}
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
-        {visible.map(p => <ProblemCard key={p.id} problem={p} />)}
-      </div>
-    </div>
+    </main>
   )
 }

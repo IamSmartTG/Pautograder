@@ -1,39 +1,26 @@
 import { useNavigate } from 'react-router-dom'
 
-const BADGE_COLOR = {
-  easy: '#22c55e', medium: '#f59e0b', hard: '#ef4444',
-  expert: '#8b5cf6', master: '#ec4899', challenger: '#111827', sovereign: '#581c87'
+const RANK_COLOR = {
+  easy: '#56d364', medium: '#e3b341', hard: '#f0883e', expert: '#f85149',
+  master: '#db61a2', challenger: '#a371f7', sovereign: '#ffd33d',
 }
 const TYPE_ICON = { algorithm: '⚡', interactive: '🎨', webapp: '🌐' }
 
 export default function ProblemCard({ problem }) {
   const nav = useNavigate()
+  const desc = problem.description.slice(0, 100) + (problem.description.length > 100 ? '…' : '')
   return (
-    <div
-      onClick={() => nav(`/problem/${problem.id}`)}
-      style={{
-        border: '1px solid #e5e7eb', borderRadius: 8, padding: 16,
-        cursor: 'pointer', background: '#fff',
-        transition: 'box-shadow .15s'
-      }}
-      onMouseEnter={e => e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,.12)'}
-      onMouseLeave={e => e.currentTarget.style.boxShadow = ''}
-    >
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-        <span style={{
-          background: BADGE_COLOR[problem.difficulty], color: '#fff',
-          padding: '2px 8px', borderRadius: 4, fontSize: 12, fontWeight: 600
-        }}>
-          {problem.difficulty[0].toUpperCase() + problem.difficulty.slice(1)}
+    <button className="card" onClick={() => nav(`/problem/${problem.id}`)}>
+      <div className="card__top">
+        <span className="rank" style={{ '--rank': RANK_COLOR[problem.difficulty] }}>
+          {problem.difficulty}
         </span>
-        <span style={{ color: '#6b7280', fontSize: 13 }}>
-          {TYPE_ICON[problem.type]} {problem.type}
-        </span>
+        <span className="card__type">{TYPE_ICON[problem.type]} {problem.type}</span>
       </div>
-      <h3 style={{ margin: '0 0 6px', fontSize: 16 }}>{problem.title}</h3>
-      <p style={{ color: '#6b7280', fontSize: 13, margin: 0, lineHeight: 1.4 }}>
-        {problem.description.slice(0, 100)}{problem.description.length > 100 ? '…' : ''}
-      </p>
-    </div>
+      <span className="card__id">{problem.id}</span>
+      <h3 className="card__title">{problem.title}</h3>
+      <p className="card__desc">{desc}</p>
+      <span className="card__open">open →</span>
+    </button>
   )
 }

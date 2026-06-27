@@ -1,43 +1,43 @@
+function scoreColor(score) {
+  if (score === 100) return 'var(--pass)'
+  if (score >= 50) return 'var(--warn)'
+  return 'var(--fail)'
+}
+
 export default function ResultPanel({ result }) {
   if (!result) return null
   const { score, passed, total, results, error } = result
+  const color = scoreColor(score)
+
   return (
-    <div style={{ marginTop: 24, padding: 16, border: '1px solid #e5e7eb', borderRadius: 8, background: '#fff' }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 8 }}>
-        <h2 style={{ margin: 0, fontSize: 28, color: score === 100 ? '#16a34a' : score >= 50 ? '#d97706' : '#dc2626' }}>
-          {score}/100
-        </h2>
-        <span style={{ color: '#6b7280' }}>{passed}/{total} tests passed</span>
+    <section className="result" style={{ '--score': color }}>
+      <div className="result__bar">{error ? 'run failed' : 'run complete'} · {total} {total === 1 ? 'case' : 'cases'}</div>
+
+      <div className="result__head">
+        <div className="score">{score}<small>/100</small></div>
+        <div className="score-meta"><b>{passed}/{total}</b> {total === 1 ? 'case' : 'cases'} passed</div>
       </div>
+      <div className="meter"><div className="meter__fill" style={{ width: `${score}%` }} /></div>
 
-      {error && (
-        <pre style={{
-          background: '#fee2e2', color: '#dc2626', padding: 12,
-          borderRadius: 4, fontSize: 12, overflowX: 'auto', marginBottom: 12
-        }}>
-          {error}
-        </pre>
-      )}
+      {error && <pre className="stderr">{error}</pre>}
 
-      <div>
-        {results.map(r => (
-          <div key={r.case} style={{
-            display: 'flex', alignItems: 'flex-start', gap: 8,
-            padding: '8px 12px', marginBottom: 4, borderRadius: 4,
-            background: r.passed ? '#dcfce7' : '#fee2e2'
-          }}>
-            <span style={{ fontWeight: 700, color: r.passed ? '#16a34a' : '#dc2626' }}>
-              {r.passed ? '✓' : '✗'}
-            </span>
-            <span style={{ color: '#374151' }}>Case {r.case}</span>
-            {!r.passed && (
-              <span style={{ color: '#6b7280', fontSize: 12, marginLeft: 4 }}>
-                got: <code>{r.output}</code> · expected: <code>{r.expected}</code>
+      {results.length > 0 && (
+        <div className="cases">
+          {results.map(r => (
+            <div className={r.passed ? 'case case--pass' : 'case case--fail'} key={r.case}>
+              <span className={r.passed ? 'badge badge--pass' : 'badge badge--fail'}>
+                {r.passed ? 'PASS' : 'FAIL'}
               </span>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+              <span className="case__name">case {r.case}</span>
+              {!r.passed && (
+                <span className="case__diff">
+                  got <code>{r.output}</code><span className="arrow">→</span>expected <code>{r.expected}</code>
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
   )
 }

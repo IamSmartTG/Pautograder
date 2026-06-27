@@ -31,7 +31,7 @@ export default function Submit() {
     const f = e.target.files[0]
     if (!f) return
     if (f.size > 10 * 1024 * 1024) {
-      setFileError('File exceeds 10MB limit')
+      setFileError('File exceeds the 10MB limit. Trim it down and try again.')
       setFile(null)
       return
     }
@@ -56,105 +56,92 @@ export default function Submit() {
     }
   }
 
-  if (!problem) return <div style={{ padding: 24 }}>Loading…</div>
+  if (!problem) return <main className="page page--narrow"><p className="lead comment">// loading<span className="dots" /></p></main>
 
   const canSubmit = !loading && (tab === 'paste' ? code.trim() : !!file)
-  const TabBtn = ({ t, label }) => (
-    <button onClick={() => setTab(t)} style={{
-      padding: '6px 16px', border: 'none', borderRadius: 4, cursor: 'pointer',
-      background: tab === t ? '#3b82f6' : '#e5e7eb',
-      color: tab === t ? '#fff' : '#374151'
-    }}>{label}</button>
+  const Tab = ({ t, label }) => (
+    <button className={tab === t ? 'tab tab--on' : 'tab'} onClick={() => setTab(t)}>{label}</button>
   )
 
   return (
-    <div style={{ maxWidth: 800, margin: '0 auto', padding: 24 }}>
-      <button onClick={() => nav('/')} style={{
-        background: 'none', border: 'none', cursor: 'pointer', color: '#3b82f6', marginBottom: 12
-      }}>← Back</button>
+    <main className="page page--narrow">
+      <button className="back" onClick={() => nav('/')}>← all problems</button>
 
-      <h1 style={{ marginBottom: 4 }}>{problem.title}</h1>
-      <p style={{ color: '#6b7280', marginBottom: 12 }}>
-        {problem.difficulty} · {problem.type} · {problem.time_limit_seconds}s limit
-      </p>
-      <p style={{ lineHeight: 1.6, marginBottom: 24 }}>{problem.description}</p>
+      <p className="eyebrow">{problem.id}</p>
+      <h1 className="title">{problem.title}</h1>
+      <div className="meta">
+        <span className="tag">{problem.difficulty}</span>
+        <span className="tag">{problem.type}</span>
+        <span className="tag">{problem.time_limit_seconds}s limit</span>
+      </div>
+      <p className="prose">{problem.description}</p>
 
       {problem.examples && problem.examples.length > 0 && (
-        <div style={{ marginBottom: 24 }}>
+        <div className="examples">
           {problem.examples.map((ex, i) => (
-            <div key={i} style={{ marginBottom: 12 }}>
-              <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 4 }}>Example {i + 1}</div>
-              <div style={{ display: 'grid', gridTemplateColumns: '64px 1fr', gap: 8, alignItems: 'start', fontSize: 13 }}>
-                <span style={{ color: '#6b7280' }}>Input</span>
-                <pre style={{ margin: 0, background: '#f3f4f6', padding: '6px 10px', borderRadius: 4, whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{ex.input}</pre>
-                <span style={{ color: '#6b7280' }}>Output</span>
-                <pre style={{ margin: 0, background: '#f3f4f6', padding: '6px 10px', borderRadius: 4, whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{ex.output}</pre>
+            <div className="example" key={i}>
+              <div className="example__head">example {i + 1}</div>
+              <div className="io">
+                <span className="io__k">input</span>
+                <pre className="io__v">{ex.input}</pre>
+                <span className="io__k">output</span>
+                <pre className="io__v">{ex.output}</pre>
               </div>
               {ex.explanation && (
-                <div style={{ color: '#6b7280', fontSize: 13, marginTop: 6 }}>
-                  <span style={{ fontWeight: 600 }}>Explanation: </span>{ex.explanation}
-                </div>
+                <div className="example__why"><b>why: </b>{ex.explanation}</div>
               )}
             </div>
           ))}
         </div>
       )}
 
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center' }}>
-        {problem.type === 'algorithm' && <TabBtn t="paste" label="Paste Code" />}
-        <TabBtn t="upload" label="Upload File" />
-        {problem.type === 'algorithm' && (
-          <select value={language} onChange={e => setLanguage(e.target.value)} style={{
-            marginLeft: 'auto', padding: '6px 10px', borderRadius: 4,
-            border: '1px solid #d1d5db', fontSize: 13, cursor: 'pointer'
-          }}>
-            <option value="python">Python 3.11</option>
-            <option value="c">C (gcc)</option>
-            <option value="cpp">C++ (g++ 17)</option>
-          </select>
+      <div className="pane">
+        <div className="pane__bar">
+          {problem.type === 'algorithm' && <Tab t="paste" label="Paste code" />}
+          <Tab t="upload" label="Upload file" />
+          {problem.type === 'algorithm' && (
+            <select
+              className="select pane__spacer"
+              value={language}
+              onChange={e => setLanguage(e.target.value)}
+            >
+              <option value="python">Python 3.11</option>
+              <option value="c">C (gcc)</option>
+              <option value="cpp">C++ (g++ 17)</option>
+            </select>
+          )}
+        </div>
+
+        {tab === 'paste' ? (
+          <textarea
+            className="editor"
+            value={code}
+            onChange={e => setCode(e.target.value)}
+            spellCheck={false}
+            placeholder="# paste your solution here"
+          />
+        ) : (
+          <>
+            <div
+              className={file ? 'dropzone dropzone--filled' : 'dropzone'}
+              onClick={() => fileRef.current.click()}
+            >
+              {file ? `📄 ${file.name}` : (problem.type === 'algorithm'
+                ? 'Click to choose your solution file · max 10MB'
+                : 'Click to choose a .zip containing index.html · max 10MB')}
+            </div>
+            <input ref={fileRef} type="file" onChange={handleFileChange} style={{ display: 'none' }} />
+            {fileError && <p className="file-error">{fileError}</p>}
+          </>
         )}
       </div>
 
-      {tab === 'paste' ? (
-        <textarea
-          value={code} onChange={e => setCode(e.target.value)}
-          rows={14} placeholder="Paste your solution here…"
-          style={{
-            width: '100%', fontFamily: 'monospace', fontSize: 13,
-            padding: 12, border: '1px solid #d1d5db', borderRadius: 6
-          }}
-        />
-      ) : (
-        <div>
-          <div
-            onClick={() => fileRef.current.click()}
-            style={{
-              border: '2px dashed #d1d5db', borderRadius: 8, padding: 40,
-              textAlign: 'center', cursor: 'pointer', color: '#6b7280'
-            }}
-          >
-            {file ? `📄 ${file.name}` : (problem.type === 'algorithm'
-              ? 'Click to select your solution file (max 10MB)'
-              : 'Click to select a .zip containing index.html (max 10MB)')}
-          </div>
-          <input ref={fileRef} type="file" onChange={handleFileChange} style={{ display: 'none' }} />
-          {fileError && <p style={{ color: '#dc2626', marginTop: 6, fontSize: 13 }}>{fileError}</p>}
-        </div>
-      )}
-
-      <button
-        onClick={handleSubmit} disabled={!canSubmit}
-        style={{
-          marginTop: 14, padding: '10px 28px', background: canSubmit ? '#3b82f6' : '#9ca3af',
-          color: '#fff', border: 'none', borderRadius: 6, cursor: canSubmit ? 'pointer' : 'default',
-          fontSize: 15, fontWeight: 600
-        }}
-      >
-        {loading ? 'Grading…' : 'Submit'}
+      <button className="run" onClick={handleSubmit} disabled={!canSubmit}>
+        {loading ? <>grading<span className="dots" /></> : 'Run & grade'}
       </button>
-      {loading && <p style={{ color: '#6b7280', marginTop: 6, fontSize: 13 }}>Running in sandbox…</p>}
+      {loading && <p className="run__hint">// running in an isolated container — no network, capped memory</p>}
 
       <ResultPanel result={result} />
-    </div>
+    </main>
   )
 }
